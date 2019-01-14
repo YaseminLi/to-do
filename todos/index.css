@@ -1,65 +1,276 @@
-body{
+html,body{
     margin: 0;
     padding: 0;
 }   
 
-body{/*可以和margin\padding合并？*/
+body{
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;/*font-family字体选项*/
     background: #f5f5f5;
     line-height: 1.4em;/*font-size的1.4倍*/
-    color: #4d4d4d;/*多余？*/
-    min-width: 230px;/*min\max?*/
+     color: #4d4d4d;
+    min-width: 230px;/*浏览器的width小于min-width时，会zhe'die*/
     max-width: 550px;
     margin: 0 auto;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;/*抗锯齿渲染，字体更平滑*/
-    -moz-osx-font-smoothing: grayscale;
+    /* -moz-osx-font-smoothing: grayscale; */
 }
 
-h1{/*todoapp h1 与h1 区别*/
+.todoapp{
+    background: #fff;
+    margin:130px 0 40px 0;
+    position: relative;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+h1{
     color:rgba(175, 47, 47, 0.15);
     font-size: 100px;
     text-align: center;
     top:-155px;
     font-weight: 100;
-    width:100%;/*多余？*/
-    position: absolute;/*与.todoapp定位？？*/
-    -webkit-text-rendering: optimizeLegibility;
-	-moz-text-rendering: optimizeLegibility;
-	text-rendering: optimizeLegibility;/*文本渲染属性*/
+    width:100%;/*继承body的max-width*/
+    position: absolute;
+    text-rendering: optimizeLegibility;
+	/*-webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    文本渲染属性*/
+}
+.new-todo,
+.edit {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	font-size: 24px;
+	font-family: inherit;
+	font-weight: inherit;
+	line-height: 1.4em;
+	border: 0;
+	color: inherit;
+	padding: 6px;
+	border: 1px solid #999;
+	box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    outline: none;/* 去除蓝框 */
 }
 
-.todoapp{
-    background: #fff;
-    margin:130px 0 140px 0;
+.new-todo {
+	padding: 16px 16px 16px 60px;
+	border: none;
+	background: rgba(0, 0, 0, 0.003);
+	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+}
+.main{
     position: relative;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #e6e6e6;
+    z-index: 2;/*仅在定位元素上有用，数字时会创建一个为0的本地，值越大，显示越靠前；auto时，于父元素相同，不会创建为0的本地；inherit继承父元素的*/
 }
 
-.todoapp input::-webkit-input-placeholder{/*placeholder样式设置&兼容性https://blog.csdn.net/qinjm8888/article/details/79047638*/
-    /*width: 500px;
-    margin: 0 auto;
-    background: white;
-    box-shadow: 0px 1px 10px #888888;*/
-    color: #e6e6e6;
-    font-style: italic;
-	font-weight: 300;
+.toggle-all{
+    width: 10px;
+    height: 10px;
+    /* border: none; */
+    opacity: 0;/* 设为透明 */
+    position: absolute;/*父元素main*/
+    right: 100%;/*距父元素的右边100%宽度*/
+    bottom: 100%;
+    ;
 }
-.todoapp input::-moz-placeholder{
+.toggle-all + label{/*只设置label还是一起的？，空格+的含义*/
+    width: 60px;
+    height: 34px;
+    position: absolute;
+     top: -52px;
+    left: -13px;
+    transform: rotate(90deg);
     color: #e6e6e6;
-    font-style: italic;
-	font-weight: 300;
 }
-.todoapp input::input-placeholder{
-    color: #e6e6e6;
-    font-style: italic;
-	font-weight: 300;
+.toggle-all + label::before{
+    content: '❯';
+     font-size: 22px;
+     color:inherit;
+    padding: 10px 27px 10px 27px;/*对应旋转前的上下左右*/
+} 
+
+.todo-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+.todo-list li{
+    font-size: 24px;
+    border-top: 1px solid #e6e6e6 ;
+    position: relative;
+}
+
+.todo-list li .destroy::after{
+    content:'x';
+}
+
+.todo-list li .destroy{
+    display: none;
+    color: #cc9a9a;
+    font-size: 30px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 36px;
+    height: 36px;
+    margin: auto 0;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    transition: color 0.2s ease-out;
+}
+.todo-list li:hover .destroy{
+    display: block;
+}
+.todo-list li .destroy:hover{
+    color:#af5b5e;
+}
+.todo-list li .toggle {
+	text-align: center;
+	width: 40px;
+	/* auto, since non-WebKit browsers doesn't support input styling */
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	border: none; /* Mobile Safari */
+	-webkit-appearance: none;
+	appearance: none;
+}
+.todo-list li .toggle {
+	opacity: 0;
+}
+
+.todo-list li label {
+    word-break: break-all;/*允许在单词内换行 */
+	padding: 15px 15px 15px 60px;
+	display: block;
+	line-height: 1.2;
+	/* transition: color 0.4s; */
+}
+.todo-list li .toggle + label {
+	/*
+		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
+		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
+	*/
+	background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.todo-list li .toggle:checked + label {
+	background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E');
+}
+
+.todo-list li.completed{
+    text-decoration: line-through;/* 删除线 */
+    color: #d9d9d9;
+}
+
+.todo-list li.editing {
+	border-bottom: none;
+	padding: 0;
+}
+.todo-list li.editing .edit{
+    display: block;
+	width: 506px;
+	padding: 12px 16px;
+	margin: 0 0 0 43px;
+}
+.todo-list li.editing .view {
+	display: none;
+}
+.footer{
+    color: #777;
+	padding: 10px 15px;
+	height: 20px;
+	text-align: center;
+	border-top: 1px solid #e6e6e6;}
+
+.footer:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    overflow: hidden;
+    box-shadow: 
+    0 1px 1px rgba(0, 0, 0, 0.2),
+    0 8px 0 -3px #f6f6f6, 
+    0 9px 1px -3px rgba(0, 0, 0, 0.2), 
+    0 16px 0 -6px #f6f6f6,  
+    0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}
+
+.todo-count{
+    /* span为行内元素，哪个行？ */
+    float: left;
+    text-align:left;/* 与float left重复？  */
+}
+.filters{
+    margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	right: 0;
+	left: 0;
+}
+
+.filters li{
+    /* 转化为内联元素，没有换行符 */
+    display: inline;
+}
+
+.filters li a{
+    color: inherit;
+	margin: 3px;
+	padding: 3px 7px;
+	text-decoration: none;
+	border: 1px solid transparent;
+	border-radius: 3px;
+}
+
+.filters li a:hover {    
+    border-color: rgba(175, 47, 47, 0.1);
+} 
+
+.filters li .selected{    
+    border-color: rgba(175, 47, 47, 0.2);
+}
+
+
+.clear-completed{
+    position: absolute;
+    cursor: pointer;
+    line-height: 20px;
+    right: 10px;
+    bottom: 10px
+}
+
+.clear-completed:hover{
+    text-decoration: underline;
+}
+
+button{ 
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background:none ;
+    color: inherit;
+    vertical-align: baseline;
+    font-size: 100%
+}
+
 .info{
     text-align: center;
     color:#bfbfbf;
     font-size: 10px;
-    margin: 65px auto 0;/*多余？*/
+    margin: 65px auto 0;/*和todoapp之间的margin折叠为65*/
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
@@ -69,8 +280,8 @@ h1{/*todoapp h1 与h1 区别*/
 
 .info a{
     text-decoration: none;
-    color:inherit;/*继承父元素的值*/
-    font-weight: 400;/*多余？*/
+    color:inherit;/* 继承父元素的值，不设置颜色的话，a标签标签字体默认为蓝色 */
+    /* font-weight: 400; */
 }
 .info a:hover{
     text-decoration: underline;
