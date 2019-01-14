@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>YAM-TODOS</title>
     <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
-    <!-- <script src="todos-helper.js"></script> -->
-    <script src="todos.js"></script>
+   
 </head>
  
 <body class="learn-bar">
@@ -16,28 +15,21 @@
             <h1>todos</h1>
             <input class="new-todo" placeholder="What needs to be done?" autofocus/>
         </header>
-        <section class="main" style="display: block">
-            <input id="toggle-all" class="toggle-all" type="checkbox">
+        <section class="main" style="display: none">
+            <input id="toggle-all" class="toggle-all" type="checkbox" onclick="toggleAll()" >
             <label for="toggle-all"></label>
 
             <ul class="todo-list">
-                <!-- <li>
-                    <div class="view">
-                        <input class="toggle" type="checkbox">
-                        <label>1</label>
-                        <button class="destroy" onclick="remove()"></button>
-                    </div>
-                </li> -->
             </ul>
         </section>
-        <footer class="footer" style="display: block">
-            <span class="todo-count">1 item left</span>
+        <footer class="footer" style="display: none">
+            <span class="todo-count"></span>
             <ul class="filters">
-                <li><a href="#/" class="selected">All</a></li>
-                <li><a href="#/active">Active</a></li>
-                <li><a href="#/selected" >Completed</a></li>
+                <li><a href="#/" class="selected" onclick="clickFilter('All')">All</a></li>
+                <li><a href="#/" onclick="clickFilter('Active')">Active</a></li>
+                <li><a href="#/" onclick="clickFilter('Completed')">Completed</a></li>
             </ul>
-                <button class="clear-completed" style="display:none">Clear Completed</button>
+                <button class="clear-completed" onclick="removeCompleted()"></button>
             
         </footer>
  
@@ -48,6 +40,9 @@
         <p>Refactored by <a href="https://github.com/cburgmer">Christoph Burgmer</a></p>
         <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
     </footer>
+
+    <script src="helper.js"></script>
+    <script src="todos.js"></script>
 </body>
 
 </html>
