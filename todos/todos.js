@@ -1,3 +1,5 @@
+'use strict';
+
 var todos = [];
 
 var $newTodo = qs('.new-todo');
@@ -66,7 +68,7 @@ function remove(id) {
 }
 
 function getCount() {
-    var activeTodos = 0; completedTodos = 0; totalTodos = 0;
+    var activeTodos = 0, completedTodos = 0, totalTodos = 0;
     for (var i = 0; i < todos.length; i++) {
         totalTodos++;
         if (todos[i].completed) {
@@ -76,7 +78,7 @@ function getCount() {
         }
     }
     //update activecount
-    plural = activeTodos > 1 ? 's' : "";
+    var plural = activeTodos > 1 ? 's' : "";
     var updateTodocount = `<strong>${activeTodos}</strong> item${plural} left`;
     qs('.todo-count').innerHTML = updateTodocount;
 
@@ -159,7 +161,8 @@ $delegate(qs('.todo-list'), 'li label', 'dblclick', function (item) {
 //编辑结束
 $delegate(qs('.todo-list'), 'li .edit', 'keypress', function (event) {
     console.log('keypress');
-    if (event.keyCode === self.ENTER_KEY) {
+    var ENTER_KEY=13;
+    if (event.keyCode === ENTER_KEY) {
         this.blur();
     }
 })
