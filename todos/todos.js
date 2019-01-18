@@ -22,15 +22,27 @@ function renderTodos() {
     // var waitRender = todos.filter();
     var status = qs('li .selected').innerHTML;
     var waitRender;
-    if (status === 'All') {
+    //用switch语句写下面的if else
+    switch (status) {
+        case 'All':
         waitRender = todos;
-    } else {
-        if (status === 'Active') {
+            break;
+            case 'Active':
             waitRender = todos.filter(element => element.completed === false);
-        } else {
-            waitRender = todos.filter(element => element.completed === true);
-        }
+            break;
+        default:
+        waitRender = todos.filter(element => element.completed === true);
+            break;
     }
+    // if (status === 'All') {
+    //     waitRender = todos;
+    // } else {
+    //     if (status === 'Active') {
+    //         waitRender = todos.filter(element => element.completed === false);
+    //     } else {
+    //         waitRender = todos.filter(element => element.completed === true);
+    //     }
+    // }
     var all = '';
     //waitRender.forEach
     waitRender.forEach(function (item, index) {
