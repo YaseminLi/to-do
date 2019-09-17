@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>to-do</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+   
+</head>
+ 
+<body class="learn-bar">
+    <section class="todoapp"> 
+        <header class="header">
+            <h1>todo</h1>
+            <input class="new-todo" placeholder="What needs to be done?" autofocus/>
+        </header>
+        <section class="main" style="display: none">
+            <input id="toggle-all" class="toggle-all" type="checkbox" onclick="toggleAll()" >
+            <label for="toggle-all"></label>
+
+            <ul class="todo-list">
+            </ul>
+        </section>
+        <footer class="footer" style="display: none">
+            <span class="todo-count"></span>
+            <ul class="filters">
+                <li><a href="#/" class="selected" onclick="clickFilter('All')">All</a></li>
+                <li><a href="#/" onclick="clickFilter('Active')">Active</a></li>
+                <li><a href="#/" onclick="clickFilter('Completed')">Completed</a></li>
+            </ul>
+                <button class="clear-completed" onclick="removeCompleted()"></button>
+            
+        </footer>
+ 
+    </section>
+    <footer class="info">
+        <p>Double-click to edit a todo</p>
+        <p>Created by <a href="http://twitter.com/oscargodson">Oscar Godson</a></p>
+        <p>Refactored by <a href="https://github.com/cburgmer">Christoph Burgmer</a></p>
+        <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+    </footer>
+
+    <script src="helper.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
