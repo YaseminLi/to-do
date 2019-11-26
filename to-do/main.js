@@ -34,15 +34,7 @@ function renderTodos() {
         waitRender = todos.filter(element => element.completed === true);
             break;
     }
-    // if (status === 'All') {
-    //     waitRender = todos;
-    // } else {
-    //     if (status === 'Active') {
-    //         waitRender = todos.filter(element => element.completed === false);
-    //     } else {
-    //         waitRender = todos.filter(element => element.completed === true);
-    //     }
-    // }
+
     var all = '';
     //waitRender.forEach
     waitRender.forEach(function (item, index) {
@@ -62,19 +54,6 @@ function renderTodos() {
 }
 
 function remove(id) {
-    // // console.log(index);
-    // var allLi = qsa('li', qs('.todo-list'));
-    // qs('.todo-list').removeChild(allLi[index]);
-    // todos.splice(index, 1);
-    //传入的id为变量，remove("${item.id}")可传入数字
-
-    //用for循环
-    // id.remove(); 
-    // for(var i=0;i<todos.length;i++){
-    //     if(todos[i].id===id.id)
-    //     todos.splice(i, 1);
-    // } 
-
     todos = todos.filter(element => element.id !== id);
     renderTodos();
 }
@@ -125,18 +104,6 @@ $delegate(qs('.todo-list'), '.toggle', 'click', function (item) {
 });
 
 function removeCompleted() {
-    //for循环方法
-    // for (var i = 0; i < todos.length; i++) {
-    //     if (todos[i].completed) {
-    //         console.log(todos[i]);
-    //         var id=todos[i].id;
-    //         console.log(id);
-    //         qs('#'+id).remove(); 
-    //          todos.splice(i, 1);
-    //          i--;
-    //     }
-    // }
-
     todos = todos.filter(element => element.completed === false);
     renderTodos();
 }
@@ -197,89 +164,3 @@ $delegate(qs('.todo-list'), 'li .edit', 'blur', function () {
     }
     renderTodos();
 })
-// //创建新item,id=gettime,value,completed,
-// var newItem = {
-//     title: $newTodo.value,
-//     completed: false,
-//     id: new Date().getTime()
-// };
-
-// //创建一个todo数组,
-// var todo = [];
-// todo.push(newItem);
-// var active = 0; completed = 0; total = 0;//怎么把属性负给todo?
-
-
-// //todo 数组的遍历
-// for (var i = 0; i < todo.length; i++) {
-//     console.log(todo[i]);
-//     total++;
-//     if (todo[i].completed == false) {
-//         active++;
-//     } else {
-//         completed++;
-//     }
-// }
-
-// //input输入完成后，执行显示li框、footer、更新todo-count、clear new-todo
-
-// //增加li节点
-// //找到父元素
-// var $todoList = document.getElementsByClassName('todo-list')[0];
-// //创建要增加的元素,button绑定移除事件
-// var $addLi = document.createElement('li');
-// var liContent =
-//     '<div class="view">'
-//     + '<input class="toggle" ondblclick="editItem()" type="checkbox" {{checked}}>'
-//     + '<label>$newItem.value</label>'
-//     + '<button class="destroy" onclick="remove()"></button>'
-//     + '</div>'
-// $addLi.innerHTML = liContent;
-// //追加节点
-// $todoList.appendChild($addLi);
-
-// //显示main、footer
-// var $main = document.getElementsByClassName('main')[0];
-// $main.style.display = "block";
-// var $footer = document.getElementsByClassName('footer')[0];
-// $footer.style.display = "block";
-
-// //更新todo-count?写不进去
-// var $todoCount = document.getElementsByClassName('todo-count');
-// var manyS = active == 1 ? '' : 's';
-// var todoCount = '<strong>'
-//     + active + '</strong> item' + manyS
-//     + ' left';
-// $todoCount.innerHTML = todoCount;
-
-// //清空$newtodo.value
-// $newTodo.value = "";
-
-
-// //completed:打勾，显示clearcompleted,内容划斜线，todocount变化
-// var $toggle = document.getElementsByClassName('toggle')[0];
-// var $clearCompleted = document.getElementsByClassName('clear-completed')[0];
-// if ($toggle.checked) {
-//     $clearCompleted.style.display = "block"
-// }
-// else { $clearCompleted.style.display = "none" }
-
-// //remove移除事件 
-
-// function remove() {
-
-//     //动态隐藏
-
-//     // $main.style.display = "none";
-
-//     //remove代码删除
-//     $todoList.removeChild($addLi);
-// }
-
-// //清除已完成的item,li消失，clearcomplete按钮消失,还没写完
-// function removeCompleted(){
-//     $clearCompleted.style.display = "none"
-// }
-
-// //双击input，进入编辑模式
-// function editItem(params) {}

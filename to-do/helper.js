@@ -2,8 +2,7 @@
 (function (window) {
 	'use strict';
 
-    // Get element(s) by CSS selector:找到某些元素
-    //querySelector获取文档中第一个元素
+    //querySelector获取满足条件的第一个元素，selector为css选择器
 	window.qs = function (selector, scope) {
 		return (scope || document).querySelector(selector);
 	};
@@ -11,7 +10,7 @@
 		return (scope || document).querySelectorAll(selector);
 	};
 
-	// addEventListener wrapper:
+	// 事件监听函数的封装
 	window.$on = function (target, type, callback, useCapture) {
 		target.addEventListener(type, callback, !!useCapture);
 	};
@@ -37,7 +36,7 @@
 		window.$on(target, type, dispatchEvent, useCapture);
 	};
 
-	// Find the element's parent with the given tag name:查找父元素节点
+	// 查找a元素的一个为b的父元素，递归
 	// $parent(qs('a'), 'div');
 	window.$parent = function (element, tagName) {
 		if (!element.parentNode) {
