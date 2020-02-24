@@ -1,5 +1,5 @@
 # todoMVC
-用不同框架实现一个待办事项管理项目，[http://todomvc.com/](http://todomvc.com/)
+用不同框架实现一个待办事项管理项目，[参考](http://todomvc.com/)
 
 主要有以下功能：
 
@@ -10,14 +10,17 @@
 
 ## Demo
 [演示](https://yaseminli.github.io/to-do/)
+<img src='./readme_image/to-do.png'/>
 
-这里用react和不使用框架进行了进行了两种实现
 
-不使用框架，纯JS编写的特点：
+## 实现
+这里用MVC、MVVM框架进行了两种实现
+
+MVC，不使用框架：
 - 需要用大量的代码编写对DOM节点的操作
 - 页面需要显示的数据发生变化时，要手动操作节点去渲染
 
-使用react,即MVVM框架
+MVVM，使用react：
 - 数据可以双向绑定，自动更新DOM
 
 
